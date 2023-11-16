@@ -4,12 +4,13 @@ const onClick = () => {
     alert('on click ');
 }
 
-const GameCircle = () => {
-  return (
+const GameCircle = ({id, children}) => {
+    console.log(id);
+    return (
     <div onClick={onClick}>
-        GameCircle
+         {children}
      </div>
   )
 }
 
-export default GameCircle
+export default GameCircle;
