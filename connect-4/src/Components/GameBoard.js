@@ -1,6 +1,8 @@
 import React, {useState} from "react";
 import GameCircle from "./GameCircle";
+import Header from "./Header";
 import '../Game.css';
+import Footer from "./Footer";
 
 const NO_CIRCLE = 16;
 const NO_PLAYER = 0;
@@ -44,13 +46,17 @@ const GameBoard = () => {
    }
 
    const renderCircle = id => {
-      return <GameCircle id={id} className={`player_${gameBoard[id]}`} onCircleClicked={circleClicked}/>
+      return <GameCircle  key={id} id={id} className={`player_${gameBoard[id]}`} onCircleClicked={circleClicked}/>
    }
 
     return (
+      <>
+        <Header />
         <div className="gameBoard">
           {initBoard()}
         </div>
+       <Footer/>
+       </> 
     )
 }
 
