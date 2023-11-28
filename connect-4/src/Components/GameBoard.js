@@ -4,17 +4,19 @@ import Header from "./Header";
 import '../Game.css';
 import Footer from "./Footer";
 import { isWinner } from "../helper";
-
-const NO_CIRCLE = 16;
-const NO_PLAYER = 0;
-const PLAYER_1 = 1;
-const PLAYER_2 = 2;
+import {GAME_STATE_PLAYING,
+        NO_PLAYER,
+        PLAYER_1,
+        PLAYER_2,
+        NO_CIRCLE,
+        GAME_STATE_WIN} from "../Constants";
 
 
 const GameBoard = () => {
    const [gameBoard, setGameBoard] = useState(Array(16).fill(NO_PLAYER));
    const [currentPalyer, setCurrentPalyer] = useState(PLAYER_1);
-
+   const [gameState, setGameState] = useState(GAME_STATE_PLAYING);
+   const [winPlayer,setWinPlayer] = useState(NO_PLAYER);
    console.log(gameBoard);
 
    const initBoard = () => {
@@ -28,11 +30,14 @@ const GameBoard = () => {
 
 
    const circleClicked = (id) => {
-    
           console.log('circle clicked:' + id);
+          if (gameBoard[id] !== NO_PLAYER) return;
+          if (gameState !== GAME_STATE_PLAYING) return;
+          
           if (isWinner(gameBoard, id, currentPalyer)) 
           {
-            console.log("WINNER");
+            setGameState(GAME_STATE_WIN);
+            setWinPlayer(currentPalyer);
           }
           
           setGameBoard(prev => {
@@ -56,7 +61,7 @@ const GameBoard = () => {
 
     return (
       <>
-        <Header player={currentPalyer}/>
+        <Header gameState={gameState} currentPlayer={currentPalyer} winPlayer={winPlayer}/>
         <div className="gameBoard">
           {initBoard()}
         </div>
