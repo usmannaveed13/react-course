@@ -3,13 +3,14 @@ import GameCircle from "./GameCircle";
 import Header from "./Header";
 import '../Game.css';
 import Footer from "./Footer";
-import { isWinner } from "../helper";
+import { isDraw, isWinner } from "../helper";
 import {GAME_STATE_PLAYING,
         NO_PLAYER,
         PLAYER_1,
         PLAYER_2,
         NO_CIRCLE,
-        GAME_STATE_WIN} from "../Constants";
+        GAME_STATE_WIN,
+        GAME_STATE_DRAW} from "../Constants";
 
 
 const GameBoard = () => {
@@ -40,6 +41,11 @@ const GameBoard = () => {
             setWinPlayer(currentPalyer);
           }
           
+          if (isDraw(gameBoard, id, currentPalyer)) 
+          {
+            setGameState(GAME_STATE_DRAW);
+            setWinPlayer(NO_PLAYER);
+          }
           setGameBoard(prev => {
             return prev.map((circle, pos) => {
                  if (pos === id) return currentPalyer;

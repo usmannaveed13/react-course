@@ -1,6 +1,6 @@
 import React from 'react'
 import '../Game.css';
-import {GAME_STATE_PLAYING,
+import {GAME_STATE_DRAW, GAME_STATE_PLAYING,
         GAME_STATE_WIN} from "../Constants";
 
 export const Header = ({gameState,currentPlayer,winPlayer}) => {
@@ -10,6 +10,9 @@ export const Header = ({gameState,currentPlayer,winPlayer}) => {
         return <div>Player { currentPlayer } Trun</div>
       case GAME_STATE_WIN:
         return <div>Player { winPlayer } Wins</div> 
+      case GAME_STATE_DRAW:
+        return <div>Game is a Draw!</div>
+      default:    
     }
   } 
 
